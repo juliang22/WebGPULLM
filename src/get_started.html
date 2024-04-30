@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script type="module" src="./chat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Interface</title>
+  <link rel="stylesheet" href="chat.css">
+
+</head>
+
+<body>
+  <div class="chat-container">
+    <div class="chat-box">
+      <div class="bot-selector">
+        <select id="bot-dropdown">
+          <option value="bot1">Llama3-OpenBioLLM-8B</option>
+          <option value="bot2">Local Inference</option>
+        </select>
+      </div>
+      <div id="welcome-splash" class="welcome-splash" style="">
+        <h1>Welcome to the future of digital healthcare!</h1>
+        <p>Select a chatbot and start messaging.</p>
+      </div>
+      <div id="chat-messages" class="chat-messages">
+      </div>
+      <div id="progress-alert" class="progress-alert" style="display: none;">
+        Loading...</div>
+      <form id="message-form" class="message-form">
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</body>
+
+
+</html>

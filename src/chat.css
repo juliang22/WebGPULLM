@@ -1,0 +1,175 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+.chat-box {
+    width: 90%;
+    max-width: 600px;
+    height: 80vh;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    position: relative;
+    overflow: hidden; /* Ensures nothing spills out */
+}
+
+
+.chat-messages {
+    list-style: none;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-messages li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: #007BFF;
+    color: white;
+    word-wrap: break-word;
+    max-width: 70%;
+}
+
+.chat-messages li.from-user {
+    background-color: #007BFF;
+    color: white;
+    margin-left: auto; /* Align to right */
+    align-self: flex-end;
+	margin-right: 25px;
+}
+
+.chat-messages li.from-bot {
+    background-color: #e0e0e0;
+    color: black;
+    margin-right: auto; /* Align to left */
+    align-self: flex-start;
+	margin-left: 25px;
+}
+
+.message-form {
+    display: flex;
+    padding: 10px;
+    background: #eee;
+    border-top: 1px solid #ddd;
+    width: calc(100% - 20px);  /* Full width minus padding */
+	margin: 0;
+}
+
+.message-form input[type="text"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.message-form button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.message-form button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+/* styles.css */
+/* General body and chat-container styles remain the same */
+
+.bot-selector {
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.bot-selector select {
+    width: 50%;
+    padding: 10px 15px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20clip-rule%3D%22evenodd%22%20d%3D%22M7.41%208L12%2012.59%20L16.59%208%20L18%209.41%20L12%2015.41%20L6%209.41%20L7.41%208Z%22%20fill%3D%22%23AAAAAA%22%3E%3C/path%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+
+/* Rest of the styles are the same */
+
+
+.welcome-splash {
+    position: absolute;
+    top: 60; /* Start at the top edge of the chat-box */
+    left: 0; /* Start at the left edge of the chat-box */
+    width: 100%; /* Take the full width of the chat-box */
+    height: 80%; /* Take the full height of the chat-box */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+
+	text-align: center;
+}
+.chat-messages {
+    list-style: none;
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.message-form {
+    width: calc(100% - 20px);
+    padding: 10px;
+    display: flex;
+    background: #eee;
+    border-top: 1px solid #ddd;
+}
+
+
+.progress-alert {
+    color: #ffffff;
+    background-color: #f44336; /* Red for visibility */
+    padding: 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100; /* High z-index to ensure it's above other content */
+    display: none; /* Hidden by default, to be shown programmatically */
+}
+
