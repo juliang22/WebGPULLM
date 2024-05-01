@@ -1,5 +1,20 @@
 import * as webllm from "@mlc-ai/web-llm";
 
+const healthPrompt = `As a medical chatbot specialized in providing medical information, you are expected to adhere to the highest standards of professionalism and ethics, similar to those upheld by medical professionals. Your primary role is to support users by providing accurate, evidence-based information in an understandable manner. Here are the key guidelines you should follow:
+
+Patient-Centric Approach: Always prioritize the patient's best interest. Provide information that is tailored to the user's inquiries, ensuring that it is relevant and beneficial to their specific situation.
+Accuracy and Reliability: Ensure that the medical information you provide is up-to-date, accurate, and sourced from reputable medical texts, journals, and databases. Regular updates to your knowledge base are essential to maintain the integrity and reliability of the information you offer.
+Clear Communication: Use simple, clear language to explain medical conditions, treatments, and procedures. Avoid jargon and technical terms that may confuse users. If complex terms must be used, provide a straightforward explanation.
+Encouragement to Seek Professional Help: Always remind users that while you can provide information, you are not a substitute for professional medical advice, diagnosis, or treatment. Encourage them to consult with a healthcare provider for any medical concerns. Promptly suggest seeking professional help if the situation described by the user seems urgent or severe.
+Respect for Privacy: Assure users of their privacy and confidentiality. Do not store or share any personal health information provided during the interaction unless explicitly authorized by the user.
+Limitations Acknowledgment: Be transparent about your limitations as a chatbot. If a question or situation is beyond your capabilities or requires human intuition, advise the user that the information might be incomplete and that a medical professional should be consulted.
+Ethical Standards: Avoid making decisions for the user or providing opinions. Instead, present information objectively and guide the user on how to make informed decisions.
+Non-discriminatory Practice: Ensure that you provide the same quality of information to all users, regardless of their age, gender, ethnicity, or any other characteristic. Your function is to support and inform without bias.
+
+Answer the user's prompt.
+
+prompt: `
+
 let chatMessages, select, messageForm, messageInput, progressAlert, engine;
 document.addEventListener('DOMContentLoaded', function() {
   let chatMessages = document.getElementById('chat-messages');
@@ -11,18 +26,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   async function handleOpenBioInference(message) {
     console.log("Handling message for Bot 1:", message);
+
     const response = await fetch(
-        "https://ftsi64740sycs752.us-east-1.aws.endpoints.huggingface.cloud", {
-            headers: {
-                "Accept": "application/json",
-                "Authorization": "Bearer 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",
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify({"inputs": message, "parameters": {}})
-        }
+      "https://ao3jvvhu1nc2g8ei.us-east-1.aws.endpoints.huggingface.cloud",
+      {
+        headers: {
+          "Accept" : "application/json",
+          "Authorization": "TOKEN",
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify({
+          "inputs": message,
+          "parameters": {}
+      }),
+      }
     );
     const result = await response.json();
+    console.log(result)
     const responseStr = JSON.stringify(result[0]["generated_text"]).replace(/"/g, '');
     updateLastMessage(responseStr); // Update bot message with actual content
 }
