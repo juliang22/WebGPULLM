@@ -1,14 +1,30 @@
-# WebLLM Get Started App
+# Local GPU LLM Inference with WebLLM
 
-This folder provides a minimum demo to show WebLLM API in a webapp setting.
-To try it out, you can do the following steps under this folder
+## Abstract
+This research combines new developments in generative artificial intelligence—specifically, improvements to open-source fine-tunings for the medical domain and local hosting implementations—to explore a new paradigm for personalized healthcare. Currently, given the often cost-prohibitive nature of seeking out a physician, patients are forced to rely on online advice forums and other less reliable digital information sources to fill the gaps. However, these online resources have major weaknesses. They are unreliable, inconsistent, and most importantly, they lack access to crucial context about the patient’s symptoms and medical history—so often, instead of a medical expert predicting the cause of the malady, the patient must instead do that prediction themselves. Furthermore, large scale providers like OpenAI, Amazon, and Google have the rights to the data that is sent to them on their platform. This technology should ideally be implemented where people have control over their data and are not reliant on large providers for vital medical information. By using a large language model (LLM) running locally on a user’s computer to answer medical questions this project aims to explore a core challenge in AI healthcare: privacy. 
 
-```bash
-npm install
-npm start
-```
+## Intro
+Even in an era of ubiquitous accessible information, the quest for reliable and personalized healthcare guidance remains a challenge faced by almost all Americans. The traditional avenue of seeking medical advice, i.e., costly and difficult to schedule consultations with physicians, has prompted a significant portion of the populace to resort to online forums and digital platforms like WebMD for healthcare insights. However, there are major problems with these platforms: the information on them is often unreliable and inconsistent, and the advice might make sense broadly but not be relevant without the context of the patient’s real symptoms and medical background. Consequently, individuals navigating these virtual spaces frequently find themselves in the precarious position of self-diagnosing and prognosticating their ailments—a task that ideally should be entrusted to seasoned medical experts. The emergence of generative artificial intelligence presents a promising avenue for reshaping the landscape of personalized healthcare. This project seeks to explore methods to bridge the chasm between the impersonal nature of online health forums and the tailored expertise of medical practitioners. By relying on a locally-deployed LLM that can be interacted with in a browser, patients can ask medical questions privately and securely.
 
-Note if you would like to hack WebLLM core package.
-You can change web-llm dependencies as `"file:../.."`, and follow the build from source
-instruction in the project to build webllm locally. This option is only recommended
-if you would like to hack WebLLM core package.
+
+## Related Work
+While the idea of using machine learning to aid in answering healthcare questions is not new, it is only recently that machine learning models—particularly LLMs—have achieved a quality that makes them practical for these purposes. These “conversational health agents” (CHAs), have been explored primarily in academic contexts. While LLMs have improved the quality of CHAs, they still struggle with specific limitations, like lacking multi-step problem-solving, personalized conversations, and multi-modal data analysis [https://arxiv.org/pdf/2310.02374]. Researchers have attempted to deploy OpenAI’s ChatGPT model in medical contexts, but have identified numerous concerns like ethics, copyright, transparency, legal issues, bias, plagiarism, cybersecurity, lack of originality, and the risk of hallucination [https://www.mdpi.com/2227-9032/11/6/887]. Researchers have also explored open-source alternatives.MedAlpaca, proposed by Han et. Al, offered an open-source collection of medical models and training data with over 160,000 entries [https://arxiv.org/abs/2304.08247]. However, most of this work has used massive models with trillions of parameters that must be run through big centralized private servers. This paper attempts to explore the feasibility of smaller models (on the order of billions of parameters) deployed locally to help answer medical questions with an emphasis on privacy and security.
+
+## Methodology
+The project setup involved configuring a Node Package Manager (NPM) environment with Parcel as a build tool to facilitate local development. The primary technology used was WebLLM, which enables web applications to perform AI inference directly on a user's GPU, thereby ensuring that data processing remains on the client's device, outside the reach of third-party servers. 
+
+Attempts to integrate this setup into an Appian UI component were initially made. Appian, a platform widely used for building business workflow applications, was considered for its potential to host a privacy-compliant healthcare chatbot. Despite extensive efforts, this integration was impeded by stringent content-security policies that blocked the necessary web interactions to load model weights.
+
+After facing barriers with the Appian platform, the focus shifted to a fully local setup. A successful local deployment of WebLLM was achieved, along with a custom chat UI. This setup allowed for hosting and testing the Llama-8B model, which yielded promising results. Further explorations were made with a fine-tuned medical version of this model, Openbiollm-70B, intended to enhance the AI's medical task performance. However, significant challenges were encountered in adapting the Openbiollm model for local use, including weight conversion, configuration management, and tokenizer processes. Due to these complications, an instance of the model was deployed on HuggingFace’s platform for broader accessibility and testing via their API.
+
+
+## Results
+Comparative tests between the locally hosted Llama-8B model and the Openbiollm-70B model revealed surprising findings. The Llama-8B model outperformed the more specialized Openbiollm-70B in several key areas, including medication inquiry response, medical classification, and biomarker extraction. The fine-tuned Openbiollm-70B model, despite its design for enhanced medical tasks, often returned incoherent responses or simply echoed the input prompts, highlighting the limitations of current fine-tuning methodologies in practical applications.
+
+## Conclusion
+The investigation underscores the potential of local AI processing as a viable solution for enhancing data privacy in healthcare applications. Despite the technical hurdles and mixed performance results, the study demonstrates the feasibility of deploying smaller AI models on commercial devices, offering a pathway towards more secure and private AI-driven healthcare solutions.
+
+Moving forward, the project could benefit from a broader exploration of AI models and a refined approach to integration on various platforms. Enhanced focus on user interface design and a more rigorous, iterative testing process could improve both the functionality and user acceptance of locally hosted AI solutions. Continuous performance monitoring and feedback incorporation will be crucial in evolving these solutions to meet the practical demands of healthcare providers while ensuring compliance with privacy standards.
+
+
+
